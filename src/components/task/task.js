@@ -1,22 +1,19 @@
 import './task.css'
-function Task({title,color,duration,details}) {
-    return ( <>
-        <div className="task" style={{backgroundColor:color}}>
-        <div className="title">
-            {title}<br></br>
-            {duration}<br></br>
-            {details.difficulty}<br></br>
-            {details.level}
-
+function Task({title,duration,children}) {
+    return ( 
+    <div className="task" style={{backgroundColor:'cyan'}}>
+        <div className={`title ${ duration > 55 ? "customTask":""}`}>
+            {title}
         </div>
+        {duration}
         <div className="actions">
             <span>delete</span>
             
             <span>update</span>
         </div>
+        <div>{children}</div>
     </div>
-    
-    </> );
+     );
 }
 
 export default Task;

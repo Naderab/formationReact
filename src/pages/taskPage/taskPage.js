@@ -1,11 +1,31 @@
-import Task from "../../components/task/task";
+import { useState } from "react";
 import TaskForm from "../../components/taskForm/taskForm";
+import TaskList from "../../components/taskList/taskList";
 
 function TaskPage() {
-  const loading = false;        
+  const [isVisible, setIsVisible] = useState(true);
+  const loading = false; 
+  const tasks = [{
+    _id:"1",
+    title: "Learn Html",
+    duration: "60",
+  },
+  {
+    _id:"2",
+    title: "Learn React",
+    duration: "30",
+  },{
+    _id:"1",
+    title: "Learn Angular",
+    duration: "50",
+  }]      
+  const sayHello = (value) => {
+    alert(value)
+  } 
   return (
     <>
-      <TaskForm />
+    <button onClick={()=>setIsVisible(!isVisible)}>{isVisible ? "Hide" : "Show"}</button>
+      <TaskForm sayHello={sayHello}/>
       {/* {loading ? (
         <div>loading .....</div>
       ) : (
@@ -15,14 +35,13 @@ function TaskPage() {
           <Task />
         </>
       )} */}
-      {loading && <div>loading .....</div>}
-      {!loading && (
+      {loading ? <div>loading .....</div>:(
+        isVisible &&
         <>
-          <Task title="Learn Html" color="red" duration={60} details={{ difficulty:8,level:"level 2"}}/>
-          <Task title="Learn React" color="gray" duration={60} details={{ difficulty:0,level:"level 1000"}}/>
-          <Task title="Learn Angular" color="cyan" duration={60} details={{ difficulty:10000,level:"level 20000"}}/>
+          <TaskList tasks={tasks} />
         </>
       )}
+      
     </>
   );
 }
