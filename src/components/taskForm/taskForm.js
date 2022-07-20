@@ -1,10 +1,30 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import "./taskForm.css";
+import { Button } from 'antd';
+
 function TaskForm(props) {
   // props.sayHello('Hello from TaskForm');
   const [title, setTitle] = useState("");
   const addTask = "Add a new task";
   const steps = ["Enter the task title", "Click on add task"];
+
+    // First useEffect example
+
+  // useEffect(() => {
+  //   document.title = `${title} - ${addTask}`;
+  //   console.log("we are in use effect");
+  //   // setTitle("Hello",Math.random());
+  // })
+
+    // Second useEffect example
+
+  useEffect(() => {
+    document.title = "hi";
+    console.log("we are in use effect");
+    // setTitle("Hello",Math.random());
+  })
+  console.log("we are out use effect");
+
   return (
     <>
       <ul>
@@ -18,9 +38,9 @@ function TaskForm(props) {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <button type="submit" onClick={()=> props.addTask(title)}>
-        {addTask}
-      </button>
+          <Button type="primary" onClick={()=> props.addTask(title)}>{addTask}
+
+      </Button>
     </>
   );
 }
